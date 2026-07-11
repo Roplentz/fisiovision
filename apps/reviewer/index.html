@@ -19,6 +19,11 @@
         <label class="button ghost">Importar JSON<input id="landmarksInput" type="file" accept=".json,application/json" hidden></label>
         <progress id="progress" max="1" value="0" hidden></progress><span id="status">Aguardando vídeo</span>
       </div>
+      <section id="analysis" class="analysis" hidden>
+        <div class="analysis-head"><div><span class="eyebrow">MOTOR BIOMECÂNICO</span><h2 id="analysisStatus">Análise</h2></div><div id="confidence" class="confidence"></div></div>
+        <div id="quality" class="quality"></div><div id="metrics" class="metrics"></div><ul id="reasons" class="reasons"></ul>
+        <p class="clinical">Estimativa automática para apoio à decisão. Requer confirmação profissional e não constitui diagnóstico.</p>
+      </section>
     </section>
     <aside class="card form">
       <h2>Ground truth</h2>
