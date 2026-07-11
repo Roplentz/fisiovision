@@ -2,20 +2,21 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.11.0
+## Estado atual — v0.12.0
 
 Aplicativos locais:
 
-- `apps/reviewer`: gera amostras validadas;
-- `apps/validator`: consolida métricas do dataset;
-- `apps/registry`: compara releases e avalia promoção.
+- `apps/reviewer`: gera amostras;
+- `apps/validator`: consolida validação;
+- `apps/registry`: avalia promoção;
+- `apps/control`: ativa releases e executa rollback.
 
-## Release Gate
+## Controle operacional
 
 ```bash
-npx serve apps/registry
+npx serve apps/control
 ```
 
-Cada release registra versões do motor, protocolo e modelo, checksum, estado e relatório de validação. A política técnica exige mínimos de amostras, acurácia, sensibilidade e especificidade, limites de MAE e rejeição e ausência de regressões.
+Somente releases aprovadas podem gerar configuração de consumidor. Ativações e rollbacks exigem operador e motivo e entram numa cadeia SHA-256 assinada. O painel usa chave ECDSA P-256 privada não exportável; produção deve integrar KMS ou HSM.
 
-Uma release tecnicamente elegível ainda requer aprovação profissional e plano de rollback. Consulte `docs/SPRINT11.md`.
+Consulte `docs/SPRINT12.md`.
