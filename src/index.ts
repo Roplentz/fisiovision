@@ -4,3 +4,8 @@ export * from "./quality.js";
 export * from "./signal.js";
 export * from "./confidence.js";
 export * from "./engine.js";
+export * from "./kinematics.js";
+export * from "./protocol.js";
+export * from "./registry.js";
+export * from "./segmentation.js";
+export * from "./protocols/squat.js";
