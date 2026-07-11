@@ -32,3 +32,6 @@ export * from "./jwt.js";
 export * from "./rate-limit.js";
 export * from "./http-api.js";
 export * from "./release-file-store.js";
+export * from "./jwks-cache.js";
+export * from "./prometheus.js";
+export * from "./redis-rate-limit.js";
