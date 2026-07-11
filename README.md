@@ -2,18 +2,17 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.7.0
+## Estado atual — v0.8.0
 
-O Reviewer local agora executa MediaPipe Pose diretamente no navegador:
+O Reviewer local agora completa o fluxo de análise:
 
-- seleção de vídeo autorizado;
-- Pose Landmarker em modo VIDEO;
-- amostragem controlada em 15 FPS;
-- progresso e cancelamento;
-- geração automática dos landmarks;
-- visualização sincronizada do esqueleto;
-- revisão profissional e download do pacote;
-- importação manual de JSON mantida como contingência.
+1. seleciona vídeo autorizado;
+2. executa MediaPipe no navegador;
+3. gera landmarks;
+4. executa o Motor Biomecânico de agachamento;
+5. apresenta confiança, qualidade, métricas e rejeições;
+6. coleta revisão profissional;
+7. baixa o pacote com o resultado versionado.
 
 ## Executar
 
@@ -21,8 +20,8 @@ O Reviewer local agora executa MediaPipe Pose diretamente no navegador:
 npx serve apps/reviewer
 ```
 
-Na primeira execução, o navegador baixa o runtime WASM e o modelo Pose Landmarker Lite. O vídeo permanece local e não é enviado.
+O painel mostra repetições, tempo médio, amplitude aparente dos joelhos, inclinação do tronco, frames válidos e visibilidade. Resultados rejeitados apresentam o motivo explícito.
 
 ## Limite clínico
 
-O baseline atual não demonstra validade clínica. Resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/SPRINT7.md`.
+As métricas são estimativas 2D para pesquisa e apoio à decisão. Exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/SPRINT8.md`.
