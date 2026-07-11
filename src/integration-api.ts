@@ -24,6 +24,7 @@ export async function createConsumerDeployment(
   if (!primary || primary.status !== "approved") throw new Error("requested release is not approved");
   const fallback = await source.getFallbackRelease(primary.id);
   if (fallback && fallback.status !== "approved") throw new Error("fallback release is not approved");
+  if (fallback?.id === primary.id) throw new Error("fallback must use a different release");
   const ttlSeconds = request.ttlSeconds ?? 300;
   if (!Number.isInteger(ttlSeconds) || ttlSeconds < 30 || ttlSeconds > 3600) throw new Error("ttlSeconds must be between 30 and 3600");
   const primaryConfig = toConsumerConfig(request.consumerId, primary, now);
