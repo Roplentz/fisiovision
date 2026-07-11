@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      FISIOVISION_RELEASES_FILE: /config/releases.json
+      FISIOVISION_JWT_ISSUER: ${FISIOVISION_JWT_ISSUER}
+      FISIOVISION_JWT_AUDIENCE: ${FISIOVISION_JWT_AUDIENCE}
+      FISIOVISION_JWKS_URL: ${FISIOVISION_JWKS_URL}
+      FISIOVISION_REDIS_URL: redis://redis:6379
+    volumes:
+      - ./releases.json:/config/releases.json:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
