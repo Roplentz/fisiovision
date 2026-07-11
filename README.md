@@ -2,24 +2,25 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.15.0
+## Estado atual — v0.16.0
 
-A camada operacional inclui:
+Staging está preparado com:
 
-- container multi-stage Node 22 Alpine;
-- usuário não-root e filesystem read-only;
-- `/healthz`, `/readyz` e `/metrics`;
-- cache JWKS com TTL;
-- rate limiting distribuído com Redis;
-- métricas Prometheus;
-- logs estruturados;
-- pipeline semanal de segurança;
-- build automatizado do container.
+- Kubernetes Deployment e Service;
+- probes de saúde e readiness;
+- security context restritivo;
+- NetworkPolicy;
+- alertas Prometheus;
+- workflow manual protegido por ambiente;
+- E2E com JWT RSA/JWKS real;
+- ensaio API → PilatesVision → checksum → fallback;
+- runbook de rollback completo.
 
-## Executar
+## Validar
 
 ```bash
-docker compose up --build
+npm run test:e2e
+kubectl apply -k deploy/staging
 ```
 
-O ambiente deve fornecer issuer, audience e JWKS. O arquivo `releases.json` é montado somente para leitura. Consulte `docs/SPRINT15.md`.
+O deploy real exige o ambiente GitHub `staging`, `KUBECONFIG_BASE64`, secrets da aplicação e ConfigMap de releases. Consulte `docs/STAGING_RUNBOOK.md`.
