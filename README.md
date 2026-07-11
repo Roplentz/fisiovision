@@ -2,21 +2,29 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.13.0
+## Estado atual — v0.14.0
 
-A integração de consumidores agora oferece:
+A API de integração agora é executável em Node 22:
 
-- contrato OpenAPI em `api/openapi.yaml`;
-- manifesto de deployment com validade curta;
-- release primária aprovada;
-- fallback aprovado e diferente da primária;
-- validação da identidade do consumidor;
-- verificação SHA-256 do modelo;
-- fallback automático em erro ou checksum inválido;
-- interrupção segura quando nenhuma release é verificável.
+- endpoint de deployment;
+- JWT RS256 validado por JWKS;
+- issuer, audience, exp e nbf;
+- autorização pela claim `consumers`;
+- rate limiting por sujeito e consumidor;
+- request ID e logs JSON estruturados;
+- somente releases aprovadas;
+- fallback aprovado;
+- nenhum token ou dado clínico nos logs.
 
-## PilatesVision
+## Executar a API
 
-O PilatesVision deve solicitar o manifesto autenticado, chamar `loadConsumerRelease` e inicializar o motor somente com o artefato verificado. JWT, TLS, autorização e rate limiting ficam na infraestrutura da API.
+```bash
+npm run build
+FISIOVISION_RELEASES_FILE=./releases.json \
+FISIOVISION_JWT_ISSUER=https://issuer.example \
+FISIOVISION_JWT_AUDIENCE=fisiovision-api \
+FISIOVISION_JWKS_URL=https://issuer.example/.well-known/jwks.json \
+npm run start:api
+```
 
-Consulte `docs/SPRINT13.md`.
+Para produção distribuída, substitua o rate limiter em memória por Redis ou gateway equivalente. Consulte `docs/SPRINT14.md`.
