@@ -14,8 +14,10 @@
       <div class="stage"><video id="video" controls playsinline></video><canvas id="overlay"></canvas><div id="empty">Selecione um vídeo autorizado</div></div>
       <div class="toolbar">
         <label class="button">Selecionar vídeo<input id="videoInput" type="file" accept="video/*" hidden></label>
-        <label class="button secondary">Importar landmarks<input id="landmarksInput" type="file" accept=".json,application/json" hidden></label>
-        <span id="status">Aguardando arquivos</span>
+        <button id="runMediaPipe" class="button secondary" disabled>Executar MediaPipe</button>
+        <button id="cancelMediaPipe" class="button danger" hidden>Cancelar</button>
+        <label class="button ghost">Importar JSON<input id="landmarksInput" type="file" accept=".json,application/json" hidden></label>
+        <progress id="progress" max="1" value="0" hidden></progress><span id="status">Aguardando vídeo</span>
       </div>
     </section>
     <aside class="card form">
