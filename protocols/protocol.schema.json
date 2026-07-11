@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fisiohub.dev/fisiovision/protocol.schema.json",
+  "title": "FisioVision Clinical Protocol",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "name",
+    "purpose",
+    "required_views",
+    "quality",
+    "phases",
+    "metrics",
+    "rejection_rules",
+    "clinical_language"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "population": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_views": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "frontal",
+          "lateral",
+          "posterior",
+          "oblique"
+        ]
+      },
+      "minItems": 1
+    },
+    "required_landmarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality": {
+      "type": "object"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "unit"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rejection_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "description"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clinical_language": {
+      "type": "object",
+      "required": [
+        "disclaimer",
+        "requires_professional_confirmation"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "research",
+        "validated",
+        "deprecated"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
