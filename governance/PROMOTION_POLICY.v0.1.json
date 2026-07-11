@@ -1,0 +1,12 @@
+{
+  "id": "fisiovision-promotion-v0.1",
+  "minimumSamples": 50,
+  "minimumAccuracy": 0.85,
+  "minimumSensitivity": 0.85,
+  "minimumSpecificity": 0.85,
+  "maximumRepetitionMae": 0.5,
+  "maximumRejectionRate": 0.6,
+  "requireNoStatusRegression": true,
+  "requiresProfessionalApproval": true,
+  "requiresRollbackPlan": true
+}
