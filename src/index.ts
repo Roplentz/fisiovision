@@ -15,3 +15,6 @@ export * from "./validation.js";
 export * from "./dataset.js";
 export * from "./exporter.js";
 export * from "./report.js";
+export * from "./review.js";
+export * from "./validation-package.js";
+export * from "./local-tool.js";
