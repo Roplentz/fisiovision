@@ -2,25 +2,20 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.16.0
+## Estado atual — v0.17.0
 
-Staging está preparado com:
+O motor agora possui base multimodelo e biomecânica mais rigorosa:
 
-- Kubernetes Deployment e Service;
-- probes de saúde e readiness;
-- security context restritivo;
-- NetworkPolicy;
-- alertas Prometheus;
-- workflow manual protegido por ambiente;
-- E2E com JWT RSA/JWKS real;
-- ensaio API → PilatesVision → checksum → fallback;
-- runbook de rollback completo.
+- esqueleto canônico;
+- MediaPipe 33, COCO 17 e OpenPose BODY_25;
+- adapter MMPose;
+- filtro Butterworth;
+- consistência de segmentos corporais;
+- confiança e incerteza por métrica;
+- MAE, RMSE, viés e limites de concordância;
+- revisão formal de licenças;
+- experimento planejado com Sports2D.
 
-## Validar
+O MediaPipe continua como estimador web principal. RTMPose/MMPose será inicialmente um comparador offline, sem substituir uma release aprovada.
 
-```bash
-npm run test:e2e
-kubectl apply -k deploy/staging
-```
-
-O deploy real exige o ambiente GitHub `staging`, `KUBECONFIG_BASE64`, secrets da aplicação e ConfigMap de releases. Consulte `docs/STAGING_RUNBOOK.md`.
+Consulte `docs/SPRINT17.md` e `research/THIRD_PARTY_REVIEW.md`.
