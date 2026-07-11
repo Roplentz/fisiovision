@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "fisiovision-consumer-config-v0.1",
+  "consumerId": "pilatesvision",
+  "activeReleaseId": "replace-with-approved-release",
+  "engineVersion": "0.12.0",
+  "protocolId": "squat",
+  "protocolVersion": "0.1.0",
+  "modelName": "pose-landmarker-lite",
+  "modelVersion": "1",
+  "modelChecksum": "sha256:replace-with-verified-checksum",
+  "activatedAt": "2026-07-11T00:00:00.000Z"
+}
