@@ -23,3 +23,4 @@ export * from "./extraction.js";
 export * from "./presentation.js";
 export * from "./comparison.js";
 export * from "./aggregate-validation.js";
+export * from "./model-registry.js";
