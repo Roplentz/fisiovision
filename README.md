@@ -2,24 +2,20 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.10.0
+## Estado atual — v0.11.0
 
-O projeto possui dois aplicativos locais:
+Aplicativos locais:
 
-- `apps/reviewer`: vídeo → MediaPipe → Motor Biomecânico → ground truth → pacote;
-- `apps/validator`: múltiplos pacotes → métricas consolidadas → relatórios.
+- `apps/reviewer`: gera amostras validadas;
+- `apps/validator`: consolida métricas do dataset;
+- `apps/registry`: compara releases e avalia promoção.
 
-## Executar
+## Release Gate
 
 ```bash
-npx serve apps/reviewer
-npx serve apps/validator
+npx serve apps/registry
 ```
 
-O Validator calcula matriz de confusão, acurácia, sensibilidade, especificidade, MAE de repetições, taxa de rejeição e listas de divergências. Exporta Markdown, CSV e JSON.
+Cada release registra versões do motor, protocolo e modelo, checksum, estado e relatório de validação. A política técnica exige mínimos de amostras, acurácia, sensibilidade e especificidade, limites de MAE e rejeição e ausência de regressões.
 
-Todos os arquivos permanecem no navegador e não são enviados.
-
-## Limite clínico
-
-Os resultados são evidências técnicas de pesquisa, não validação clínica isolada. Exigem revisão profissional e não constituem diagnóstico. Consulte `docs/SPRINT10.md`.
+Uma release tecnicamente elegível ainda requer aprovação profissional e plano de rollback. Consulte `docs/SPRINT11.md`.
