@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "fisiovision-dataset-v0.1",
+  "id": "example-authorized-squat",
+  "version": "0.1.0",
+  "title": "Exemplo de validação autorizada de agachamento",
+  "source": "Substituir pela origem verificável",
+  "license": "proprietary-consented",
+  "consentOrLegalBasis": "Substituir pelo registro de consentimento ou base legal",
+  "containsIdentifiableMedia": false,
+  "createdAt": "2026-07-11T00:00:00.000Z",
+  "samples": [
+    {
+      "id": "sample-001",
+      "landmarksFile": "landmarks/sample-001.json",
+      "protocolId": "squat",
+      "expectedStatus": "accepted",
+      "expectedRepetitions": 1,
+      "split": "validation",
+      "subjectPseudonym": "participant-001",
+      "tags": ["lateral", "controlled"]
+    }
+  ]
+}
