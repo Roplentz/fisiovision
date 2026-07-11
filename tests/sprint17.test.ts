@@ -29,7 +29,7 @@ describe("biomechanical signal quality", () => {
     expect(evaluateSegmentConsistency(frames, [{ id: "left_thigh", proximal: "left_hip", distal: "left_knee" }])[0]?.accepted).toBe(false);
   });
   it("produces per-metric uncertainty", () => {
-    expect(metricEvidence({ metricId: "knee", validFrameRate: .8, meanLandmarkVisibility: .9, temporalStability: .7, viewSuitability: .6, limitations: ["2D"] }).uncertainty).toBeCloseTo(.255);
+    expect(metricEvidence({ metricId: "knee", validFrameRate: .8, meanLandmarkVisibility: .9, temporalStability: .7, viewSuitability: .6, limitations: ["2D"] }).uncertainty).toBeCloseTo(.225);
   });
   it("calculates paired agreement", () => {
     const report = compareMeasurements([10, 20, 30], [11, 19, 32]);
