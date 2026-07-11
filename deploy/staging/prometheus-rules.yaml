@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: fisiovision-api
+spec:
+  groups:
+    - name: fisiovision
+      rules:
+        - alert: FisioVisionApiDown
+          expr: up{job="fisiovision-api"} == 0
+          for: 5m
+          labels: { severity: critical }
+          annotations:
+            summary: FisioVision API indisponível
+        - alert: FisioVisionHighErrorRate
+          expr: sum(rate(fisiovision_http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(fisiovision_http_requests_total[5m])), 0.001) > 0.05
+          for: 10m
+          labels: { severity: warning }
+          annotations:
+            summary: Taxa de erro acima de 5%
+        - alert: FisioVisionHighLatency
+          expr: rate(fisiovision_http_request_duration_seconds_sum[5m]) / clamp_min(rate(fisiovision_http_request_duration_seconds_count[5m]), 0.001) > 0.5
+          for: 10m
+          labels: { severity: warning }
+          annotations:
+            summary: Latência média acima de 500 ms
+        - alert: FisioVisionFallbackSpike
+          expr: increase(fisiovision_consumer_fallback_total[15m]) > 5
+          for: 5m
+          labels: { severity: critical }
+          annotations:
+            summary: Fallbacks de modelo acima do esperado
