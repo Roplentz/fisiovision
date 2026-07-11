@@ -1,0 +1,12 @@
+{
+  "id": "squat-engine-0.11.0",
+  "engineVersion": "0.11.0",
+  "protocolId": "squat",
+  "protocolVersion": "0.1.0",
+  "modelName": "pose-landmarker-lite",
+  "modelVersion": "1",
+  "modelChecksum": "sha256:replace-with-verified-checksum",
+  "createdAt": "2026-07-11T00:00:00.000Z",
+  "status": "candidate",
+  "validationReport": "validation/reports/replace-with-report.json"
+}
