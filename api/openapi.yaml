@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: FisioVision Consumer API
+  version: 0.13.0
+paths:
+  /v1/consumers/{consumerId}/deployment:
+    get:
+      summary: Retorna release aprovada e fallback aprovado
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: consumerId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: releaseId
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Manifesto de deployment de curta duração
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deployment"
+        "401": { description: Não autenticado }
+        "403": { description: Consumidor não autorizado }
+        "404": { description: Release aprovada não encontrada }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Deployment:
+      type: object
+      required: [schemaVersion, consumerId, primary, issuedAt, expiresAt]
+      properties:
+        schemaVersion: { const: fisiovision-consumer-deployment-v0.1 }
+        consumerId: { type: string }
+        primary: { $ref: "#/components/schemas/ReleaseConfig" }
+        fallback: { $ref: "#/components/schemas/ReleaseConfig" }
+        issuedAt: { type: string, format: date-time }
+        expiresAt: { type: string, format: date-time }
+    ReleaseConfig:
+      type: object
+      required: [schemaVersion, consumerId, activeReleaseId, engineVersion, protocolId, protocolVersion, modelName, modelVersion, modelChecksum, activatedAt]
+      properties:
+        schemaVersion: { const: fisiovision-consumer-config-v0.1 }
+        consumerId: { type: string }
+        activeReleaseId: { type: string }
+        engineVersion: { type: string }
+        protocolId: { type: string }
+        protocolVersion: { type: string }
+        modelName: { type: string }
+        modelVersion: { type: string }
+        modelChecksum: { type: string, pattern: "^sha256:[a-fA-F0-9]{64}$" }
+        activatedAt: { type: string, format: date-time }
