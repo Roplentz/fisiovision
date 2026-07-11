@@ -1,0 +1,31 @@
+# Dependencies and builds
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+
+# Research datasets and derived media
+data/
+datasets/
+research-data/
+videos/
+clips/
+frames/
+landmarks/
+outputs/
+models/*.bin
+models/*.task
+models/*.onnx
+models/*.tflite
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS and IDE
+.DS_Store
+.vscode/
+.idea/
