@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>FisioVision — Revisor local</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header><div><span class="eyebrow">FISIOHUB</span><h1>FisioVision Reviewer</h1></div><span class="privacy">● processamento local</span></header>
+  <main>
+    <section class="viewer card">
+      <div class="stage"><video id="video" controls playsinline></video><canvas id="overlay"></canvas><div id="empty">Selecione um vídeo autorizado</div></div>
+      <div class="toolbar">
+        <label class="button">Selecionar vídeo<input id="videoInput" type="file" accept="video/*" hidden></label>
+        <label class="button secondary">Importar landmarks<input id="landmarksInput" type="file" accept=".json,application/json" hidden></label>
+        <span id="status">Aguardando arquivos</span>
+      </div>
+    </section>
+    <aside class="card form">
+      <h2>Ground truth</h2>
+      <label>ID da amostra<input id="sampleId" value="sample-001"></label>
+      <label>Protocolo<select id="protocol"><option value="squat">Agachamento</option></select></label>
+      <label>Resultado esperado<select id="expectedStatus"><option value="accepted">Aceito</option><option value="rejected">Rejeitado</option></select></label>
+      <label>Repetições esperadas<input id="repetitions" type="number" min="0" step="1" value="1"></label>
+      <label>Split<select id="split"><option>validation</option><option>development</option><option>test</option></select></label>
+      <label>ID do revisor<input id="reviewerId" placeholder="profissional-001"></label>
+      <label>Notas<textarea id="notes" rows="3" placeholder="Observações da revisão"></textarea></label>
+      <button id="approve" class="approve">Aprovar e gerar pacote</button>
+      <p class="notice">O vídeo não é enviado nem incluído no pacote.</p>
+      <div id="errors" role="alert"></div>
+    </aside>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
