@@ -21,13 +21,10 @@ export function inclinationFromVertical(top: Landmark, bottom: Landmark): number
 }
 
 export function midpoint(a: Landmark, b: Landmark): Landmark {
-  return {
-    x: (a.x + b.x) / 2,
-    y: (a.y + b.y) / 2,
-    z: a.z === undefined || b.z === undefined ? undefined : (a.z + b.z) / 2,
-    visibility:
-      a.visibility === undefined || b.visibility === undefined
-        ? undefined
-        : Math.min(a.visibility, b.visibility),
-  };
+  const point: Landmark = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  if (a.z !== undefined && b.z !== undefined) point.z = (a.z + b.z) / 2;
+  if (a.visibility !== undefined && b.visibility !== undefined) {
+    point.visibility = Math.min(a.visibility, b.visibility);
+  }
+  return point;
 }
