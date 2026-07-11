@@ -2,27 +2,24 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.9.0
+## Estado atual — v0.10.0
 
-O Reviewer local fecha o ciclo técnico de validação:
+O projeto possui dois aplicativos locais:
 
-1. extrai landmarks com MediaPipe;
-2. executa o Motor Biomecânico;
-3. recebe ground truth profissional;
-4. compara status e repetições;
-5. calcula erro absoluto por amostra;
-6. classifica divergências;
-7. gera relatório Markdown;
-8. incorpora comparação e relatório ao pacote auditável.
+- `apps/reviewer`: vídeo → MediaPipe → Motor Biomecânico → ground truth → pacote;
+- `apps/validator`: múltiplos pacotes → métricas consolidadas → relatórios.
 
 ## Executar
 
 ```bash
 npx serve apps/reviewer
+npx serve apps/validator
 ```
 
-Divergências não são ocultadas nem bloqueadas: são registradas como evidência para calibração e validação.
+O Validator calcula matriz de confusão, acurácia, sensibilidade, especificidade, MAE de repetições, taxa de rejeição e listas de divergências. Exporta Markdown, CSV e JSON.
+
+Todos os arquivos permanecem no navegador e não são enviados.
 
 ## Limite clínico
 
-O resultado automático é uma estimativa 2D para pesquisa e apoio à decisão. Exige confirmação profissional e não constitui diagnóstico. Consulte `docs/SPRINT9.md`.
+Os resultados são evidências técnicas de pesquisa, não validação clínica isolada. Exigem revisão profissional e não constituem diagnóstico. Consulte `docs/SPRINT10.md`.
