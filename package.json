@@ -1,6 +1,6 @@
 {
   "name": "@fisiohub/fisiovision-engine",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",
     "ci": "npm run typecheck && npm run test:run && npm run build",
-    "start:api": "node dist/http-entry.js"
+    "start:api": "node dist/http-entry.js",
+    "test:e2e": "vitest run tests/sprint16.e2e.test.ts"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
