@@ -1,0 +1,82 @@
+{
+  "id": "squat",
+  "version": "0.1.0",
+  "name": "Agachamento",
+  "purpose": "Segmentar repetições e estimar parâmetros cinemáticos 2D para apoio à avaliação profissional.",
+  "population": [
+    "adultos em contexto de pesquisa"
+  ],
+  "required_views": [
+    "frontal",
+    "lateral"
+  ],
+  "required_landmarks": [
+    "shoulders",
+    "hips",
+    "knees",
+    "ankles"
+  ],
+  "quality": {
+    "minimum_valid_frame_rate": 0.7,
+    "minimum_visibility": 0.5,
+    "full_body_required": true
+  },
+  "phases": [
+    "standing",
+    "descent",
+    "bottom",
+    "ascent",
+    "standing_end"
+  ],
+  "metrics": [
+    {
+      "id": "repetition_time",
+      "unit": "s",
+      "description": "Tempo total da repetição"
+    },
+    {
+      "id": "knee_flexion_range_left",
+      "unit": "deg",
+      "description": "Amplitude aparente do joelho esquerdo"
+    },
+    {
+      "id": "knee_flexion_range_right",
+      "unit": "deg",
+      "description": "Amplitude aparente do joelho direito"
+    },
+    {
+      "id": "trunk_inclination_p95",
+      "unit": "deg",
+      "description": "Inclinação aparente do tronco no percentil 95"
+    },
+    {
+      "id": "frontal_knee_displacement_p95",
+      "unit": "normalized",
+      "description": "Deslocamento frontal aparente do joelho; não equivale a diagnóstico de valgo"
+    }
+  ],
+  "rejection_rules": [
+    {
+      "code": "low_visibility",
+      "description": "Landmarks essenciais com visibilidade insuficiente"
+    },
+    {
+      "code": "insufficient_depth",
+      "description": "Deslocamento insuficiente para caracterizar repetição"
+    },
+    {
+      "code": "hip_knee_mismatch",
+      "description": "Movimento de quadril sem padrão bilateral coerente dos joelhos"
+    },
+    {
+      "code": "incomplete_cycle",
+      "description": "Ciclo sem retorno consistente à posição inicial"
+    }
+  ],
+  "clinical_language": {
+    "disclaimer": "Estimativa 2D para apoio à decisão. Requer confirmação profissional e não constitui diagnóstico.",
+    "requires_professional_confirmation": true
+  },
+  "evidence": [],
+  "status": "research"
+}
