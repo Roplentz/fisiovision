@@ -18,7 +18,10 @@ export type RejectionCode =
   | "insufficient_landmarks"
   | "incomplete_body"
   | "invalid_timestamps"
-  | "protocol_not_supported";
+  | "protocol_not_supported"
+  | "insufficient_depth"
+  | "hip_knee_mismatch"
+  | "incomplete_cycle";
 
 export interface RejectionReason {
   code: RejectionCode;
