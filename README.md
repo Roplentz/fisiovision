@@ -1,42 +1,34 @@
 # FisioVision Engine
 
-Motor clínico configurável de visão computacional e aprendizagem supervisionada do ecossistema **FisioHub**.
+Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
 ## Estado atual
 
-Sprint 3 concluída em modo de pesquisa:
+Sprint 4 concluída em modo de pesquisa:
 
-- gate de qualidade e resultados versionados;
-- motor de protocolos e executor do agachamento;
-- adaptador para 33 landmarks do MediaPipe Pose;
-- pipeline ponta a ponta para análise de sequências;
-- benchmark de aceitação, rejeição e contagem;
-- testes sintéticos determinísticos no CI.
+- motor biomecânico e protocolo de agachamento;
+- adaptador MediaPipe Pose e pipeline ponta a ponta;
+- artefato versionado de landmarks;
+- manifesto auditável de datasets autorizados;
+- benchmark em lote por split;
+- relatórios automáticos em Markdown e CSV;
+- proteções contra mídia identificável e caminhos inseguros.
 
-## Uso
+## Fluxo básico
 
 ```ts
-import { analyzeMediaPipe } from "@fisiohub/fisiovision-engine";
-
-const result = analyzeMediaPipe({
-  protocolId: "squat",
-  results: mediaPipeResults,
-  fps: 30,
-});
+import {
+  createLandmarkArtifact,
+  benchmarkDataset,
+  benchmarkReportToMarkdown,
+} from "@fisiohub/fisiovision-engine";
 ```
 
-O adaptador aceita `landmarks` (Tasks Vision) e `poseLandmarks`, timestamps em milissegundos ou microssegundos e geração de timestamps pelo FPS.
+O vídeo é processado localmente pelo ambiente que hospeda MediaPipe. O repositório recebe apenas código e manifestos não identificáveis; vídeos, landmarks brutos e outputs permanecem fora do Git.
 
-## Princípios
+## Governança
 
-1. Supervisão humana obrigatória.
-2. Validação antes da promoção de modelos.
-3. Separação entre assistência, pesquisa e treinamento.
-4. Consentimento, minimização e rastreabilidade.
-5. Confiança e motivos de rejeição em todas as análises.
-6. Protocolos configuráveis, versionados e auditáveis.
-7. Rollback obrigatório para modelos.
-8. Nenhum dado do PilatesVision é compartilhado automaticamente.
+Todo dataset precisa declarar origem, licença ou acordo, consentimento/base legal, versão, split e ground truth. O baseline atual não demonstra validade clínica.
 
 ## Protocolos planejados
 
@@ -49,4 +41,4 @@ O adaptador aceita `landmarks` (Tasks Vision) e `poseLandmarks`, timestamps em m
 
 ## Limite clínico
 
-O baseline atual é sintético e não demonstra validade clínica. O FisioVision gera estimativas de apoio à decisão; resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/VALIDATION_SPRINT3.md`.
+O FisioVision gera estimativas de apoio à decisão. Resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/SPRINT4.md`.
