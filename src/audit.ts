@@ -66,7 +66,7 @@ export function stableStringify(value: unknown): string {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([key, item]) => `${JSON.stringify(key)}:${stableStringify(item)}`).join(",")}}`;
   }
-  return JSON.stringify(value);
+  return JSON.stringify(value) ?? "null";
 }
 
 async function sha256(value: string): Promise<string> {
