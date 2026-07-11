@@ -2,29 +2,24 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.14.0
+## Estado atual — v0.15.0
 
-A API de integração agora é executável em Node 22:
+A camada operacional inclui:
 
-- endpoint de deployment;
-- JWT RS256 validado por JWKS;
-- issuer, audience, exp e nbf;
-- autorização pela claim `consumers`;
-- rate limiting por sujeito e consumidor;
-- request ID e logs JSON estruturados;
-- somente releases aprovadas;
-- fallback aprovado;
-- nenhum token ou dado clínico nos logs.
+- container multi-stage Node 22 Alpine;
+- usuário não-root e filesystem read-only;
+- `/healthz`, `/readyz` e `/metrics`;
+- cache JWKS com TTL;
+- rate limiting distribuído com Redis;
+- métricas Prometheus;
+- logs estruturados;
+- pipeline semanal de segurança;
+- build automatizado do container.
 
-## Executar a API
+## Executar
 
 ```bash
-npm run build
-FISIOVISION_RELEASES_FILE=./releases.json \
-FISIOVISION_JWT_ISSUER=https://issuer.example \
-FISIOVISION_JWT_AUDIENCE=fisiovision-api \
-FISIOVISION_JWKS_URL=https://issuer.example/.well-known/jwks.json \
-npm run start:api
+docker compose up --build
 ```
 
-Para produção distribuída, substitua o rate limiter em memória por Redis ou gateway equivalente. Consulte `docs/SPRINT14.md`.
+O ambiente deve fornecer issuer, audience e JWKS. O arquivo `releases.json` é montado somente para leitura. Consulte `docs/SPRINT15.md`.
