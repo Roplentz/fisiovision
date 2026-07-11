@@ -2,21 +2,21 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.12.0
+## Estado atual — v0.13.0
 
-Aplicativos locais:
+A integração de consumidores agora oferece:
 
-- `apps/reviewer`: gera amostras;
-- `apps/validator`: consolida validação;
-- `apps/registry`: avalia promoção;
-- `apps/control`: ativa releases e executa rollback.
+- contrato OpenAPI em `api/openapi.yaml`;
+- manifesto de deployment com validade curta;
+- release primária aprovada;
+- fallback aprovado e diferente da primária;
+- validação da identidade do consumidor;
+- verificação SHA-256 do modelo;
+- fallback automático em erro ou checksum inválido;
+- interrupção segura quando nenhuma release é verificável.
 
-## Controle operacional
+## PilatesVision
 
-```bash
-npx serve apps/control
-```
+O PilatesVision deve solicitar o manifesto autenticado, chamar `loadConsumerRelease` e inicializar o motor somente com o artefato verificado. JWT, TLS, autorização e rate limiting ficam na infraestrutura da API.
 
-Somente releases aprovadas podem gerar configuração de consumidor. Ativações e rollbacks exigem operador e motivo e entram numa cadeia SHA-256 assinada. O painel usa chave ECDSA P-256 privada não exportável; produção deve integrar KMS ou HSM.
-
-Consulte `docs/SPRINT12.md`.
+Consulte `docs/SPRINT13.md`.
