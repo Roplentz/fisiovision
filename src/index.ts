@@ -12,3 +12,6 @@ export * from "./protocols/squat.js";
 export * from "./adapters/mediapipe.js";
 export * from "./pipeline.js";
 export * from "./validation.js";
+export * from "./dataset.js";
+export * from "./exporter.js";
+export * from "./report.js";
