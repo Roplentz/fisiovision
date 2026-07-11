@@ -28,3 +28,7 @@ export * from "./audit.js";
 export * from "./deployment.js";
 export * from "./consumer.js";
 export * from "./integration-api.js";
+export * from "./jwt.js";
+export * from "./rate-limit.js";
+export * from "./http-api.js";
+export * from "./release-file-store.js";
