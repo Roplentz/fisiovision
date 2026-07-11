@@ -19,3 +19,4 @@ export * from "./review.js";
 export * from "./validation-package.js";
 export * from "./local-tool.js";
 export * from "./timeline.js";
+export * from "./extraction.js";
