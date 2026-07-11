@@ -11,7 +11,7 @@ export class CachedJwksProvider {
     if (this.inflight) return this.inflight;
     this.inflight = this.load(url, nowMs);
     try { return await this.inflight; }
-    finally { this.inflight = undefined; }
+    finally { delete this.inflight; }
   }
 
   isReady(nowMs = Date.now()): boolean {
