@@ -2,17 +2,18 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.8.0
+## Estado atual — v0.9.0
 
-O Reviewer local agora completa o fluxo de análise:
+O Reviewer local fecha o ciclo técnico de validação:
 
-1. seleciona vídeo autorizado;
-2. executa MediaPipe no navegador;
-3. gera landmarks;
-4. executa o Motor Biomecânico de agachamento;
-5. apresenta confiança, qualidade, métricas e rejeições;
-6. coleta revisão profissional;
-7. baixa o pacote com o resultado versionado.
+1. extrai landmarks com MediaPipe;
+2. executa o Motor Biomecânico;
+3. recebe ground truth profissional;
+4. compara status e repetições;
+5. calcula erro absoluto por amostra;
+6. classifica divergências;
+7. gera relatório Markdown;
+8. incorpora comparação e relatório ao pacote auditável.
 
 ## Executar
 
@@ -20,8 +21,8 @@ O Reviewer local agora completa o fluxo de análise:
 npx serve apps/reviewer
 ```
 
-O painel mostra repetições, tempo médio, amplitude aparente dos joelhos, inclinação do tronco, frames válidos e visibilidade. Resultados rejeitados apresentam o motivo explícito.
+Divergências não são ocultadas nem bloqueadas: são registradas como evidência para calibração e validação.
 
 ## Limite clínico
 
-As métricas são estimativas 2D para pesquisa e apoio à decisão. Exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/SPRINT8.md`.
+O resultado automático é uma estimativa 2D para pesquisa e apoio à decisão. Exige confirmação profissional e não constitui diagnóstico. Consulte `docs/SPRINT9.md`.
