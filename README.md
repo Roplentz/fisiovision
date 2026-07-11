@@ -2,37 +2,24 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.5.0
+## Estado atual — v0.6.0
 
 - motor biomecânico e protocolo de agachamento;
-- adaptador MediaPipe Pose;
-- pipeline de análise e benchmark;
-- manifestos auditáveis de datasets;
-- ferramenta local para extração, revisão e empacotamento;
-- ground truth aprovado com revisor e timestamp;
-- pacote sem vídeo, nome de arquivo ou mídia identificável;
-- relatórios de validação em Markdown e CSV.
+- integração MediaPipe e benchmark auditável;
+- ferramenta local de empacotamento;
+- interface web local em `apps/reviewer`;
+- vídeo sincronizado com sobreposição de landmarks;
+- revisão de ground truth, revisor e base legal obrigatórios;
+- download do pacote sem vídeo ou nome do arquivo original.
 
-## Ferramenta local
+## Executar o Reviewer
 
-```ts
-import { buildLocalValidationPackage } from "@fisiohub/fisiovision-engine";
-
-const output = await buildLocalValidationPackage(metadata, [{
-  video: { name: file.name, sizeBytes: file.size, type: file.type },
-  extract: () => runMediaPipeLocally(file),
-  exportOptions,
-  groundTruth,
-  reviewerId,
-}]);
+```bash
+npx serve apps/reviewer
 ```
 
-A aplicação consumidora controla a interface e executa MediaPipe no dispositivo. O motor recebe landmarks e gera somente arquivos JSON auditáveis.
+Abra o endereço local, selecione um vídeo autorizado, importe o artefato de landmarks e revise os dados. Todo o processamento da interface ocorre no navegador.
 
-## Governança
+## Governança e limite clínico
 
-Todo dataset precisa declarar origem, licença ou acordo, consentimento/base legal, versão, split e ground truth. O baseline atual não demonstra validade clínica.
-
-## Limite clínico
-
-O FisioVision gera estimativas de apoio à decisão. Resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/SPRINT5.md`.
+O baseline atual não demonstra validade clínica. O FisioVision gera estimativas de apoio à decisão; resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `apps/reviewer/README.md`.
