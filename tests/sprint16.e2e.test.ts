@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { generateKeyPairSync, sign } from "node:crypto";
+import { generateKeyPairSync, sign, type KeyObject } from "node:crypto";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   ApiMetrics, ReleaseFileStore, SlidingWindowRateLimiter, createDeploymentHandler,
@@ -18,7 +18,7 @@ const validation: AggregateValidationReport = {
 function release(id: string): EngineRelease {
   return { id, engineVersion: id, protocolId: "squat", protocolVersion: "0.1.0", modelName: "pose", modelVersion: id, modelChecksum: "sha256:"+id.padEnd(64, "0"), createdAt: "2026-07-11T00:00:00Z", status: "approved", validation };
 }
-function jwt(privateKey: ReturnType<typeof generateKeyPairSync>["privateKey"], kid: string): string {
+function jwt(privateKey: KeyObject, kid: string): string {
   const encode = (value: unknown) => Buffer.from(JSON.stringify(value)).toString("base64url");
   const header = encode({ alg: "RS256", kid, typ: "JWT" });
   const payload = encode({ sub: "pilatesvision-staging", iss: "https://issuer.staging", aud: "fisiovision-api", exp: Math.floor(Date.now()/1000)+300, consumers: ["pilatesvision"] });
