@@ -2,17 +2,30 @@
 
 Motor clínico configurável de visão computacional e aprendizagem supervisionada do ecossistema **FisioHub**.
 
-## Propósito
+## Estado atual
 
-Transformar vídeos de tarefas funcionais e exercícios em indicadores objetivos, explicáveis e versionados de apoio à decisão profissional, sem substituir a avaliação clínica ou emitir diagnóstico autônomo.
+Sprint 3 concluída em modo de pesquisa:
 
-## Posicionamento
+- gate de qualidade e resultados versionados;
+- motor de protocolos e executor do agachamento;
+- adaptador para 33 landmarks do MediaPipe Pose;
+- pipeline ponta a ponta para análise de sequências;
+- benchmark de aceitação, rejeição e contagem;
+- testes sintéticos determinísticos no CI.
 
-- **Ecossistema:** FisioHub
-- **Plataforma:** FisioVision Engine
-- **Primeiro consumidor futuro:** PilatesVision
-- **Arquitetura:** independente, API-first
-- **Estado:** fundação técnica / pesquisa
+## Uso
+
+```ts
+import { analyzeMediaPipe } from "@fisiohub/fisiovision-engine";
+
+const result = analyzeMediaPipe({
+  protocolId: "squat",
+  results: mediaPipeResults,
+  fps: 30,
+});
+```
+
+O adaptador aceita `landmarks` (Tasks Vision) e `poseLandmarks`, timestamps em milissegundos ou microssegundos e geração de timestamps pelo FPS.
 
 ## Princípios
 
@@ -25,20 +38,7 @@ Transformar vídeos de tarefas funcionais e exercícios em indicadores objetivos
 7. Rollback obrigatório para modelos.
 8. Nenhum dado do PilatesVision é compartilhado automaticamente.
 
-## Estrutura planejada
-
-```text
-engine/       processamento comum de visão e sinais
-protocols/    protocolos clínicos configuráveis
-learning/     aprendizagem supervisionada e calibração
-validation/   datasets, benchmarks e relatórios
-model-registry/ versões, desempenho e governança de modelos
-api/          integração com produtos consumidores
-tests/        testes matemáticos, clínicos e de contratos
-docs/         arquitetura, decisões e governança
-```
-
-## Protocolos iniciais
+## Protocolos planejados
 
 - agachamento;
 - sentar e levantar;
@@ -49,4 +49,4 @@ docs/         arquitetura, decisões e governança
 
 ## Limite clínico
 
-O FisioVision gera estimativas e indicadores de apoio à decisão. Resultados automáticos exigem confirmação profissional e não constituem diagnóstico.
+O baseline atual é sintético e não demonstra validade clínica. O FisioVision gera estimativas de apoio à decisão; resultados exigem confirmação profissional e não constituem diagnóstico. Consulte `docs/VALIDATION_SPRINT3.md`.
