@@ -9,3 +9,6 @@ export * from "./protocol.js";
 export * from "./registry.js";
 export * from "./segmentation.js";
 export * from "./protocols/squat.js";
+export * from "./adapters/mediapipe.js";
+export * from "./pipeline.js";
+export * from "./validation.js";
