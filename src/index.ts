@@ -24,3 +24,5 @@ export * from "./presentation.js";
 export * from "./comparison.js";
 export * from "./aggregate-validation.js";
 export * from "./model-registry.js";
+export * from "./audit.js";
+export * from "./deployment.js";
