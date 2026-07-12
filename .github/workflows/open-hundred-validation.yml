@@ -7,6 +7,8 @@ on:
       - ".github/workflows/open-hundred-validation.yml"
       - "scripts/extract-mediapipe-pose.py"
       - "scripts/validate-open-hundred.mjs"
+      - "scripts/validate-reviewed-hundred-segments.mjs"
+      - "src/recognition/pilates-the-hundred.ts"
       - "src/protocols/pilates-the-hundred.ts"
       - "research/open-media/catalog.v0.1.json"
 
@@ -37,6 +39,8 @@ jobs:
           python scripts/extract-mediapipe-pose.py --video=data/open-media/wikimedia-pilates-hundred-2018/source.webm --output=outputs/open-hundred/landmarks.json --sample-fps=5
       - name: Detect and evaluate candidate segments
         run: node scripts/validate-open-hundred.mjs --input=outputs/open-hundred/landmarks.json --output=outputs/open-hundred/report.json
+      - name: Test expert-reviewed segments with recognition gate
+        run: node scripts/validate-reviewed-hundred-segments.mjs --input=outputs/open-hundred/landmarks.json --output=outputs/open-hundred/reviewed-segments-report.json
       - name: Render clinical review overlay
         run: python scripts/render-hundred-review.py --video=data/open-media/wikimedia-pilates-hundred-2018/source.webm --landmarks=outputs/open-hundred/landmarks.json --output-video=outputs/open-hundred/review-32-44s.mp4 --output-contact-sheet=outputs/open-hundred/review-32-44s.png --start-ms=32000 --end-ms=44000
       - name: Verify review artifacts
