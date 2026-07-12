@@ -22,3 +22,7 @@ npm run dataset:keraal -- --accept-noncommercial
 O comando registra URL, data, tamanho, SHA-256, licença aceita e finalidade. Os arquivos ficam em `data/public/keraal`, ignorados pelo Git.
 
 Consulte `research/datasets/public/README.md`.
+
+## Primeiro resultado público
+
+A amostra Keraal produziu 10 pares BlazePose/OpenPose e 2.444 frames pareados. A concordância angular preliminar foi insuficiente para considerar os estimadores intercambiáveis: MAE de 22–23° nos cotovelos e aproximadamente 28° nos ombros. Consulte `research/reports/KERAAL_SAMPLE_PRELIMINARY_2026-07-12.md`.
