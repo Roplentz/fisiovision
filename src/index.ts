@@ -55,3 +55,4 @@ export * from "./protocols/pilates-swimming.js";
 export * from "./protocols/pilates-swan.js";
 export * from "./protocols/pilates-saw.js";
 export * from "./protocols/pilates-spine-stretch-forward.js";
+export * from "./protocols/pilates-single-leg-circle.js";
