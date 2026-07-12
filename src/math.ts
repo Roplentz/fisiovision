@@ -14,7 +14,7 @@ export function mean(values: readonly number[]): number {
 }
 
 export function median(values: readonly number[]): number {
-  const clean = values.filter(Number.isFinite).toSorted((a, b) => a - b);
+  const clean = [...values.filter(Number.isFinite)].sort((a: number, b: number) => a - b);
   if (clean.length === 0) return 0;
   const middle = Math.floor(clean.length / 2);
   return clean.length % 2 === 0
@@ -23,7 +23,7 @@ export function median(values: readonly number[]): number {
 }
 
 export function percentile(values: readonly number[], probability: number): number {
-  const clean = values.filter(Number.isFinite).toSorted((a, b) => a - b);
+  const clean = [...values.filter(Number.isFinite)].sort((a: number, b: number) => a - b);
   if (clean.length === 0) return 0;
   const p = clamp(probability);
   const index = (clean.length - 1) * p;
