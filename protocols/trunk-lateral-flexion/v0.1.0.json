@@ -1,0 +1,22 @@
+{
+  "id": "trunk-lateral-flexion",
+  "version": "0.1.0",
+  "name": "Flexão lateral do tronco",
+  "purpose": "Estimar amplitude lateral aparente, picos por lado e simetria em vista frontal.",
+  "required_views": ["frontal"],
+  "required_landmarks": ["shoulders", "hips"],
+  "quality": {
+    "minimum_valid_frame_rate": 0.7,
+    "minimum_visibility": 0.5,
+    "minimum_frames": 10,
+    "minimum_range_degrees": 8
+  },
+  "metrics": [
+    { "id": "trunk_lateral_flexion_range", "unit": "deg" },
+    { "id": "trunk_lateral_flexion_left_peak", "unit": "deg" },
+    { "id": "trunk_lateral_flexion_right_peak", "unit": "deg" },
+    { "id": "trunk_lateral_flexion_symmetry", "unit": "ratio" }
+  ],
+  "status": "research",
+  "disclaimer": "Estimativa 2D para pesquisa e apoio à decisão; não constitui diagnóstico."
+}
