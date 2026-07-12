@@ -23,7 +23,7 @@ export function interpolateShortGaps(values: readonly (number | null)[], maximum
     const gap = end - start;
     const left = start > 0 ? result[start - 1] : null;
     const right = end < result.length ? result[end] : null;
-    if (gap <= maximumGap && left !== null && right !== null) {
+    if (gap <= maximumGap && typeof left === "number" && typeof right === "number") {
       for (let offset = 0; offset < gap; offset += 1) {
         result[start + offset] = left + (right - left) * ((offset + 1) / (gap + 1));
       }
