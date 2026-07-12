@@ -1,0 +1,17 @@
+import{midpoint}from"../kinematics.js";import type{PoseFrame}from"../types.js";
+export interface HundredRecognitionCriterion{id:"supine_orientation"|"head_shoulders_lifted"|"legs_sustained"|"short_arm_pumps";score:number;passed:boolean;evidence:Record<string,number>}
+export interface HundredRecognitionResult{exerciseId:"pilates-the-hundred";accepted:boolean;score:number;criteria:HundredRecognitionCriterion[];failedCriteria:string[];reason?: "exercise_pose_mismatch"}
+export interface HundredRecognitionOptions{minimumCriterionScore?:number;minimumPumps?:number}
+const avg=(x:number[])=>x.length?x.reduce((a,b)=>a+b,0)/x.length:0,ratio=(x:boolean[])=>x.length?x.filter(Boolean).length/x.length:0;
+export function recognizePilatesHundred(frames:readonly PoseFrame[],options:HundredRecognitionOptions={}):HundredRecognitionResult{
+ const valid=frames.filter(f=>[7,8,11,12,15,16,23,24,25,26,27,28].every(i=>(f.landmarks[i]?.visibility??0)>=.5));if(valid.length<20)return finish([]);
+ const geometry=valid.map(f=>{const ear=midpoint(f.landmarks[7]!,f.landmarks[8]!),shoulder=midpoint(f.landmarks[11]!,f.landmarks[12]!),hip=midpoint(f.landmarks[23]!,f.landmarks[24]!),wrist=midpoint(f.landmarks[15]!,f.landmarks[16]!),ankle=midpoint(f.landmarks[27]!,f.landmarks[28]!),dx=shoulder.x-hip.x,dy=shoulder.y-hip.y,torso=Math.max(1e-9,Math.hypot(dx,dy)),headPerpendicular=Math.abs((ear.x-shoulder.x)*dy-(ear.y-shoulder.y)*dx)/torso/torso,legPerpendicular=Math.abs((ankle.x-hip.x)*dy-(ankle.y-hip.y)*dx)/torso/torso,arm=(wrist.y-shoulder.y)/torso;return{horizontal:Math.abs(dx)/torso,headPerpendicular,legPerpendicular,legLength:Math.hypot(ankle.x-hip.x,ankle.y-hip.y)/torso,arm}});
+ const horizontalRatio=ratio(geometry.map(x=>x.horizontal>=.65)),headMean=avg(geometry.map(x=>x.headPerpendicular)),legPerp=avg(geometry.map(x=>x.legPerpendicular)),legLength=avg(geometry.map(x=>x.legLength)),positions=geometry.map(x=>x.arm),lo=Math.min(...positions),hi=Math.max(...positions),range=hi-lo,lower=lo+range*.35,upper=lo+range*.65;let state:"low"|"high"|undefined,transitions=0;for(const value of positions){const next=value<=lower?"low":value>=upper?"high":undefined;if(next&&state&&next!==state)transitions++;if(next)state=next}const pumps=Math.floor(transitions/2);
+ const criteria:HundredRecognitionCriterion[]=[
+  {id:"supine_orientation",score:horizontalRatio,passed:false,evidence:{horizontalFrameRatio:horizontalRatio}},
+  {id:"head_shoulders_lifted",score:Math.min(1,headMean/.08),passed:false,evidence:{headPerpendicularTorsoRatio:headMean}},
+  {id:"legs_sustained",score:Math.min(1,(legPerp/.14+legLength/.9)/2),passed:false,evidence:{legPerpendicularTorsoRatio:legPerp,legLengthTorsoRatio:legLength}},
+  {id:"short_arm_pumps",score:Math.min(1,(range/.08+pumps/(options.minimumPumps??3))/2),passed:false,evidence:{armPumpRange:range,pumpCount:pumps}}
+ ];const threshold=options.minimumCriterionScore??.65;criteria.forEach(c=>c.passed=c.score>=threshold);return finish(criteria)
+}
+function finish(criteria:HundredRecognitionCriterion[]):HundredRecognitionResult{const failed=criteria.filter(c=>!c.passed).map(c=>c.id),score=criteria.length?criteria.reduce((a,c)=>a+c.score,0)/criteria.length:0,accepted=criteria.length===4&&!failed.length;return{exerciseId:"pilates-the-hundred",accepted,score:Number(score.toFixed(3)),criteria,failedCriteria:failed,...(accepted?{}:{reason:"exercise_pose_mismatch"as const})}}
