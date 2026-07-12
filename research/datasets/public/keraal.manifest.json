@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "fisiovision-public-dataset-v0.1",
+  "id": "keraal",
+  "version": "2024-public",
+  "title": "Low Back Pain Physical Rehabilitation Dataset",
+  "homepage": "https://keraal.enstb.org/KeraalDataset.html",
+  "sampleUrl": "https://keraal.enstb.org/data/keraal_sample_2022.zip",
+  "license": "CC-BY-NC-SA",
+  "commercialUse": false,
+  "trainingForCommercialModels": false,
+  "allowedPurpose": "research benchmark only",
+  "containsAnonymizedRgbVideo": true,
+  "modalities": ["rgb", "kinect", "vicon", "openpose-coco", "blazepose-33", "medical-annotations"],
+  "citation": "Nguyen et al. A Medical Low-Back Pain Physical Rehabilitation Database for Human Body Movement Analysis. IJCNN 2024.",
+  "downloadRequiresExplicitAcceptance": true
+}
