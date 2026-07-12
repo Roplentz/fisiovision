@@ -1,0 +1,17 @@
+{
+  "id": "pilates-shoulder-bridge",
+  "version": "0.1.0",
+  "name": "Pilates Shoulder Bridge",
+  "purpose": "Contar ciclos e estimar amplitude aparente do quadril e elevação pélvica em vista lateral.",
+  "required_views": ["lateral"],
+  "required_landmarks": ["shoulder", "hip", "knee", "ankle"],
+  "quality": { "minimum_valid_frame_rate": 0.7, "minimum_visibility": 0.5, "minimum_frames": 10 },
+  "metrics": [
+    { "id": "repetition_count", "unit": "count" },
+    { "id": "shoulder_bridge_hip_angle_range", "unit": "deg" },
+    { "id": "shoulder_bridge_pelvic_lift_max", "unit": "torso_ratio" },
+    { "id": "repetition_time", "unit": "s" }
+  ],
+  "status": "research",
+  "disclaimer": "Estimativa 2D para pesquisa e apoio à decisão; não constitui diagnóstico."
+}
