@@ -12,7 +12,8 @@
     "start:api": "node dist/http-entry.js",
     "test:e2e": "vitest run tests/sprint16.e2e.test.ts",
     "benchmark:multimodel": "node dist/multimodel-entry.js",
-    "dataset:keraal": "node scripts/download-keraal-sample.mjs"
+    "dataset:keraal": "node scripts/download-keraal-sample.mjs",
+    "dataset:open-pilates": "node scripts/download-open-media.mjs"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
