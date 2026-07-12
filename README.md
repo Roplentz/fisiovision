@@ -2,23 +2,23 @@
 
 Motor clínico configurável de visão computacional do ecossistema **FisioHub**.
 
-## Estado atual — v0.18.0
+## Dataset público inicial
 
-O benchmark multimodelo está pronto para comparar:
+Selecionamos o **Keraal Low Back Pain Physical Rehabilitation Dataset** para o primeiro benchmark público de pesquisa.
 
-- MediaPipe;
-- RTMPose/MMPose;
-- Sports2D.
+Ele contém vídeos anonimizados, BlazePose, OpenPose, Kinect/Vicon e anotações médicas. A licença é **CC-BY-NC-SA**, portanto:
 
-O pipeline alinha frames por timestamp e calcula cobertura, erro temporal, MAE, RMSE, viés e limites de concordância de 95%. Gera relatórios JSON, Markdown e CSV.
+- uso exclusivo em pesquisa e benchmark;
+- proibido como treinamento de modelo comercial;
+- conteúdo não será versionado ou redistribuído;
+- resultados não promovem automaticamente uma release comercial.
 
-## Executar
+## Baixar a amostra
 
 ```bash
-npm run build
-npm run benchmark:multimodel -- research/experiments/multimodel/manifest.example.json
+npm run dataset:keraal -- --accept-noncommercial
 ```
 
-O exemplo deve ser copiado e apontado para outputs locais reais. Vídeos, landmarks e resultados permanecem fora do Git.
+O comando registra URL, data, tamanho, SHA-256, licença aceita e finalidade. Os arquivos ficam em `data/public/keraal`, ignorados pelo Git.
 
-A Sprint 18 não declara desempenho real: ainda precisamos processar os mesmos vídeos autorizados nos três estimadores. Consulte `docs/SPRINT18.md`.
+Consulte `research/datasets/public/README.md`.
