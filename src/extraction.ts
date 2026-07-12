@@ -10,7 +10,7 @@ export function createSamplingPlan(durationSeconds: number, fps = 15, maximumFra
   if (!Number.isInteger(maximumFrames) || maximumFrames <= 0) throw new Error("maximumFrames must be a positive integer");
   const durationMs = durationSeconds * 1000;
   const stepMs = 1000 / fps;
-  const count = Math.min(maximumFrames, Math.floor(durationMs / stepMs) + 1);
+  const count = Math.min(maximumFrames, Math.floor(durationSeconds * fps + Number.EPSILON * 10) + 1);
   return {
     fps,
     durationMs,
