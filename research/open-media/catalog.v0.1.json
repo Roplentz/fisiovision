@@ -16,7 +16,9 @@
       "licenseReviewedAt": "2026-07-12",
       "licenseReviewer": "Wikimedia YouTubeReviewBot record + FisioVision manual metadata review",
       "humanRightsReview": "required",
-      "notes": "License confirmed by Wikimedia record; human review is still required before product-facing use."
+      "notes": "License confirmed by Wikimedia record; human review is still required before product-facing use.",
+      "expectedBytes": 80623941,
+      "expectedSha256": "sha256:e63ee8eab2b91c894365ac2474d0fb596b3ceaf7506191aaa0fe93192aef3921"
     }
   ]
 }

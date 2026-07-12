@@ -1,0 +1,47 @@
+name: Open Media Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      media_id:
+        description: Catalog media id
+        required: true
+        default: wikimedia-pilates-hundred-2018
+  pull_request:
+    paths:
+      - ".github/workflows/open-media-verify.yml"
+      - "scripts/download-open-media.mjs"
+      - "research/open-media/catalog.v0.1.json"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MEDIA_ID: ${{ inputs.media_id || 'wikimedia-pilates-hundred-2018' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Download licensed media and create provenance
+        run: node scripts/download-open-media.mjs --accept-cc-by --id="$MEDIA_ID"
+      - name: Verify media container and integrity
+        run: |
+          FILE=$(find "data/open-media/$MEDIA_ID" -maxdepth 1 -type f -name 'source.*' -print -quit)
+          test -n "$FILE"
+          test -s "$FILE"
+          file "$FILE"
+          file "$FILE" | grep -Eiq 'WebM|Matroska'
+          sha256sum "$FILE"
+          node -e 'const fs=require("fs");const p="data/open-media/"+process.env.MEDIA_ID+"/DOWNLOAD.json";const x=JSON.parse(fs.readFileSync(p));if(!x.integrityVerified||x.bytes<1000)process.exit(1);console.log(JSON.stringify(x))'
+      - name: Store temporary research artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-media-${{ env.MEDIA_ID }}
+          path: data/open-media/${{ env.MEDIA_ID }}/
+          retention-days: 1
+          if-no-files-found: error
