@@ -12,11 +12,12 @@ export type KeraalJointDictionary = Record<string, [number, number] | [number, n
 export type KeraalFrameDictionary = Record<string, KeraalJointDictionary>;
 
 export function keraalBlazePoseToFrames(
-  dictionary: KeraalFrameDictionary,
+  input: KeraalFrameDictionary | { positions: KeraalFrameDictionary },
   fps: number,
   normalize?: { width: number; height: number },
 ): PoseFrame[] {
   if (!Number.isFinite(fps) || fps <= 0) throw new Error("fps must be greater than zero");
+  const dictionary = "positions" in input ? input.positions : input;
   const frames = Object.entries(dictionary).sort(([a], [b]) => Number(a) - Number(b));
   return frames.map(([frameNumber, joints]) => {
     const landmarks: Landmark[] = BLAZEPOSE_NAMES.map((name) => {
