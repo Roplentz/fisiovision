@@ -57,3 +57,4 @@ export * from "./protocols/pilates-saw.js";
 export * from "./protocols/pilates-spine-stretch-forward.js";
 export * from "./protocols/pilates-single-leg-circle.js";
 export * from "./protocols/pilates-side-kick.js";
+export * from "./protocols/pilates-leg-pull-front.js";
