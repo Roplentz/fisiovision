@@ -1,0 +1,789 @@
+{
+  "schemaVersion": "fisiovision-pilates-recognition-v0.1",
+  "profiles": [
+    {
+      "id": "pilates-shoulder-bridge",
+      "name": "Shoulder Bridge",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Decúbito dorsal, joelhos flexionados, pés apoiados e pelve no solo.",
+      "movementSignature": "Elevação e retorno da pelve mantendo apoio de ombros e pés.",
+      "requiredLandmarks": [
+        "shoulders",
+        "hips",
+        "knees",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "supine_orientation",
+          "description": "supine orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "knees_flexed",
+          "description": "knees flexed",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "pelvis_lift_cycle",
+          "description": "pelvis lift cycle",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "hip thrust",
+        "glute bridge",
+        "pelvic tilt"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-side-leg-lift",
+      "name": "Side Leg Lift",
+      "allowedViews": [
+        "frontal",
+        "oblique"
+      ],
+      "initialPosition": "Decúbito lateral com pernas alinhadas e tronco estável.",
+      "movementSignature": "Abdução e retorno repetido da perna superior.",
+      "requiredLandmarks": [
+        "shoulders",
+        "hips",
+        "knees",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "side_lying_orientation",
+          "description": "side lying orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "single_leg_abduction",
+          "description": "single leg abduction",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "pelvis_stable",
+          "description": "pelvis stable",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "side kick",
+        "standing hip abduction"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-roll-down",
+      "name": "Roll Down",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Sentado ou em pé com tronco ereto antes da flexão.",
+      "movementSignature": "Flexão progressiva do tronco seguida de retorno à posição inicial.",
+      "requiredLandmarks": [
+        "ear",
+        "shoulder",
+        "hip",
+        "knee",
+        "ankle"
+      ],
+      "criteria": [
+        {
+          "id": "upright_start",
+          "description": "upright start",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "trunk_flexion_return",
+          "description": "trunk flexion return",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "lower_limbs_stable",
+          "description": "lower limbs stable",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "spine stretch forward",
+        "roll up",
+        "forward bend"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-single-leg-stretch",
+      "name": "Single Leg Stretch",
+      "allowedViews": [
+        "frontal",
+        "oblique"
+      ],
+      "initialPosition": "Decúbito dorsal com cabeça elevada e ambas as pernas fora do apoio.",
+      "movementSignature": "Alternância entre um joelho flexionado e a perna oposta estendida.",
+      "requiredLandmarks": [
+        "shoulders",
+        "hips",
+        "knees",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "supine_head_lift",
+          "description": "supine head lift",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "reciprocal_knee_pattern",
+          "description": "reciprocal knee pattern",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "bilateral_alternation",
+          "description": "bilateral alternation",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "bicycle",
+        "criss cross",
+        "marching"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-the-hundred",
+      "name": "The Hundred",
+      "allowedViews": [
+        "lateral",
+        "oblique"
+      ],
+      "initialPosition": "Decúbito dorsal, cabeça/ombros elevados, pernas sustentadas e braços ao lado do tronco.",
+      "movementSignature": "Bombeamentos curtos e repetidos dos braços enquanto tronco e pernas permanecem sustentados.",
+      "requiredLandmarks": [
+        "ears",
+        "shoulders",
+        "wrists",
+        "hips",
+        "knees",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "supine_orientation",
+          "description": "supine orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "head_shoulders_lifted",
+          "description": "head shoulders lifted",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "legs_sustained",
+          "description": "legs sustained",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "short_arm_pumps",
+          "description": "short arm pumps",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 4,
+      "confounders": [
+        "arm waving",
+        "supine warm-up",
+        "single leg stretch",
+        "introductory gestures"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-swimming",
+      "name": "Swimming",
+      "allowedViews": [
+        "oblique",
+        "posterior"
+      ],
+      "initialPosition": "Decúbito ventral com braços e pernas estendidos.",
+      "movementSignature": "Elevações rápidas e alternadas de braço e perna contralaterais.",
+      "requiredLandmarks": [
+        "shoulders",
+        "wrists",
+        "hips",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "prone_orientation",
+          "description": "prone orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "contralateral_limb_lifts",
+          "description": "contralateral limb lifts",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "continuous_alternation",
+          "description": "continuous alternation",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "bird dog",
+        "superman",
+        "flutter kicks"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-swan",
+      "name": "Swan",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Decúbito ventral, mãos próximas ao tronco e pelve apoiada.",
+      "movementSignature": "Elevação do tronco em extensão seguida de retorno.",
+      "requiredLandmarks": [
+        "shoulder",
+        "elbow",
+        "wrist",
+        "hip",
+        "knee"
+      ],
+      "criteria": [
+        {
+          "id": "prone_orientation",
+          "description": "prone orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "trunk_extension_cycle",
+          "description": "trunk extension cycle",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "pelvis_supported",
+          "description": "pelvis supported",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "cobra",
+        "push-up",
+        "superman"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-saw",
+      "name": "Saw",
+      "allowedViews": [
+        "frontal",
+        "elevated_frontal"
+      ],
+      "initialPosition": "Sentado com pernas afastadas e braços abertos.",
+      "movementSignature": "Rotação/flexão alternada com alcance da mão em direção ao pé oposto.",
+      "requiredLandmarks": [
+        "shoulders",
+        "wrists",
+        "hips",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "seated_wide_leg_base",
+          "description": "seated wide leg base",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "cross_body_reach",
+          "description": "cross body reach",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "left_right_alternation",
+          "description": "left right alternation",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "seated toe touch",
+        "spine twist",
+        "hamstring stretch"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-spine-stretch-forward",
+      "name": "Spine Stretch Forward",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Sentado ereto com pernas estendidas à frente.",
+      "movementSignature": "Flexão anterior simétrica do tronco e retorno, sem alcance cruzado.",
+      "requiredLandmarks": [
+        "ear",
+        "shoulder",
+        "hip",
+        "knee",
+        "ankle"
+      ],
+      "criteria": [
+        {
+          "id": "seated_long_sit",
+          "description": "seated long sit",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "symmetric_forward_flexion",
+          "description": "symmetric forward flexion",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "return_to_upright",
+          "description": "return to upright",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "roll down",
+        "seated toe touch",
+        "saw"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-single-leg-circle",
+      "name": "Single Leg Circle",
+      "allowedViews": [
+        "frontal",
+        "oblique"
+      ],
+      "initialPosition": "Decúbito dorsal, uma perna sustentada e a outra estável.",
+      "movementSignature": "Trajetória circular completa de uma perna em relação à pelve.",
+      "requiredLandmarks": [
+        "shoulders",
+        "hips",
+        "moving_knee",
+        "moving_ankle"
+      ],
+      "criteria": [
+        {
+          "id": "supine_orientation",
+          "description": "supine orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "single_limb_circular_path",
+          "description": "single limb circular path",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "contralateral_side_stable",
+          "description": "contralateral side stable",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "straight leg raise",
+        "hip abduction",
+        "bicycle"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-side-kick",
+      "name": "Side Kick",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Decúbito lateral com perna superior alinhada ao tronco.",
+      "movementSignature": "Deslocamento repetido da perna superior para frente e para trás.",
+      "requiredLandmarks": [
+        "shoulder",
+        "hip",
+        "moving_knee",
+        "moving_ankle"
+      ],
+      "criteria": [
+        {
+          "id": "side_lying_orientation",
+          "description": "side lying orientation",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "front_back_leg_excursion",
+          "description": "front back leg excursion",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "trunk_pelvis_stable",
+          "description": "trunk pelvis stable",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "side leg lift",
+        "walking",
+        "leg swing standing"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-leg-pull-front",
+      "name": "Leg Pull Front",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Prancha em apoio anterior com corpo sustentado.",
+      "movementSignature": "Elevação alternada das pernas mantendo a linha corporal.",
+      "requiredLandmarks": [
+        "shoulders",
+        "hips",
+        "knees",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "anterior_plank_support",
+          "description": "anterior plank support",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "alternating_leg_lifts",
+          "description": "alternating leg lifts",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "body_line_sustained",
+          "description": "body line sustained",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "plank",
+        "mountain climber",
+        "push-up"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-plank",
+      "name": "Plank",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Apoio anterior em mãos/antebraços e pés com corpo elevado.",
+      "movementSignature": "Sustentação isométrica do alinhamento sem alternância das pernas.",
+      "requiredLandmarks": [
+        "shoulder",
+        "elbow",
+        "wrist",
+        "hip",
+        "ankle"
+      ],
+      "criteria": [
+        {
+          "id": "anterior_support",
+          "description": "anterior support",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "isometric_hold",
+          "description": "isometric hold",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "body_line_sustained",
+          "description": "body line sustained",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "leg pull front",
+        "push-up",
+        "pike"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-bird-dog",
+      "name": "Bird Dog / Quadruped",
+      "allowedViews": [
+        "lateral",
+        "oblique"
+      ],
+      "initialPosition": "Posição quadrúpede com mãos e joelhos apoiados.",
+      "movementSignature": "Extensão alternada de braço e perna contralaterais.",
+      "requiredLandmarks": [
+        "shoulders",
+        "wrists",
+        "hips",
+        "ankles"
+      ],
+      "criteria": [
+        {
+          "id": "quadruped_base",
+          "description": "quadruped base",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "contralateral_extension",
+          "description": "contralateral extension",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "return_to_four_point_support",
+          "description": "return to four point support",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "swimming",
+        "donkey kick",
+        "quadruped arm raise"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    },
+    {
+      "id": "pilates-teaser",
+      "name": "Teaser",
+      "allowedViews": [
+        "lateral"
+      ],
+      "initialPosition": "Decúbito dorsal com tronco e pernas inicialmente próximos ao apoio.",
+      "movementSignature": "Elevação combinada de tronco e pernas formando posição em V, seguida de retorno.",
+      "requiredLandmarks": [
+        "shoulder",
+        "hip",
+        "knee",
+        "ankle"
+      ],
+      "criteria": [
+        {
+          "id": "supine_start",
+          "description": "supine start",
+          "required": true,
+          "minimumScore": 0.7
+        },
+        {
+          "id": "combined_trunk_leg_rise",
+          "description": "combined trunk leg rise",
+          "required": true,
+          "minimumScore": 0.65
+        },
+        {
+          "id": "v_shape_and_return",
+          "description": "v shape and return",
+          "required": true,
+          "minimumScore": 0.65
+        }
+      ],
+      "minimumRequiredCriteria": 3,
+      "confounders": [
+        "sit-up",
+        "roll up",
+        "boat pose"
+      ],
+      "rejectionReasons": [
+        "view_mismatch",
+        "landmarks_missing",
+        "initial_pose_mismatch",
+        "movement_signature_mismatch"
+      ],
+      "limitations": [
+        "2D projection cannot confirm out-of-plane motion",
+        "does not diagnose injury or estimate tissue load"
+      ]
+    }
+  ]
+}
