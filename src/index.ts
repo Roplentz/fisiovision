@@ -45,3 +45,4 @@ export * from "./multimodel-benchmark.js";
 export * from "./multimodel-io.js";
 export * from "./multimodel-report.js";
 export * from "./keraal.js";
+export * from "./protocols/trunk-lateral-flexion.js";

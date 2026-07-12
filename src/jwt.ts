@@ -28,7 +28,7 @@ export async function verifyConsumerJwt(
   if (header.alg !== "RS256" || !header.kid) throw new Error("JWT must use RS256 with kid");
   const getJwks = config.fetchJwks ?? defaultFetchJwks;
   const jwks = await getJwks(config.jwksUrl);
-  const jwk = jwks.keys.find((key) => key.kid === header.kid && key.kty === "RSA");
+  const jwk = jwks.keys.find((key) => (key as JsonWebKey & { kid?: string }).kid === header.kid && key.kty === "RSA");
   if (!jwk) throw new Error("signing key not found");
   const key = await globalThis.crypto.subtle.importKey(
     "jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"],
