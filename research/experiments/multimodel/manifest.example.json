@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "fisiovision-multimodel-run-v0.1",
+  "datasetId": "authorized-squat-v0.1",
+  "toleranceMs": 40,
+  "inputs": [
+    { "path": "outputs/mediapipe-series.json", "estimator": "mediapipe" },
+    { "path": "outputs/rtmpose-series.json", "estimator": "rtmpose" },
+    { "path": "outputs/sports2d-series.json", "estimator": "sports2d" }
+  ],
+  "outputPrefix": "outputs/multimodel-report"
+}
