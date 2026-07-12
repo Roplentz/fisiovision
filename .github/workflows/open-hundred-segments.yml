@@ -1,0 +1,44 @@
+name: Open Hundred Source Segmentation
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/open-hundred-segments.yml"
+      - "scripts/segment-review-video.py"
+      - "research/open-media/catalog.v0.1.json"
+
+permissions:
+  contents: read
+
+jobs:
+  segment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install video tooling
+        run: python -m pip install --disable-pip-version-check opencv-python-headless==4.11.0.86
+      - name: Download pinned source
+        run: node scripts/download-open-media.mjs --accept-cc-by --id=wikimedia-pilates-hundred-2018
+      - name: Create numbered 30-second review clips
+        run: python scripts/segment-review-video.py --video=data/open-media/wikimedia-pilates-hundred-2018/source.webm --output-dir=outputs/open-hundred-segments --segment-seconds=30
+      - name: Verify segment package
+        run: |
+          test -s outputs/open-hundred-segments/contact-sheet-all-segments.jpg
+          test -s outputs/open-hundred-segments/segments.json
+          test "$(find outputs/open-hundred-segments -name 'segment-*.mp4' | wc -l)" -ge 18
+          file outputs/open-hundred-segments/contact-sheet-all-segments.jpg
+          node -e 'const r=require("./outputs/open-hundred-segments/segments.json");if(r.segments.length<18||r.segments.some(x=>x.bytes<1000||!x.sha256.startsWith("sha256:")))process.exit(1);console.log(JSON.stringify({segments:r.segments.length,duration:r.sourceDurationSeconds,totalBytes:r.segments.reduce((a,x)=>a+x.bytes,0)}))'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: open-hundred-numbered-segments
+          path: outputs/open-hundred-segments/
+          retention-days: 7
+          if-no-files-found: error
