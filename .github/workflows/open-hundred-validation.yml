@@ -1,0 +1,48 @@
+name: Open Hundred Pose Validation
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/open-hundred-validation.yml"
+      - "scripts/extract-mediapipe-pose.py"
+      - "scripts/validate-open-hundred.mjs"
+      - "src/protocols/pilates-the-hundred.ts"
+      - "research/open-media/catalog.v0.1.json"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: npm install
+      - run: npm run build
+      - name: Install research-only pose extractor
+        run: python -m pip install --disable-pip-version-check mediapipe==0.10.21 opencv-python-headless==4.11.0.86
+      - name: Download pinned CC BY video
+        run: node scripts/download-open-media.mjs --accept-cc-by --id=wikimedia-pilates-hundred-2018
+      - name: Extract MediaPipe landmarks
+        run: |
+          mkdir -p outputs/open-hundred
+          python scripts/extract-mediapipe-pose.py --video=data/open-media/wikimedia-pilates-hundred-2018/source.webm --output=outputs/open-hundred/landmarks.json --sample-fps=5
+      - name: Detect and evaluate candidate segments
+        run: node scripts/validate-open-hundred.mjs --input=outputs/open-hundred/landmarks.json --output=outputs/open-hundred/report.json
+      - name: Show validation report
+        run: |
+          node -e 'const r=require("./outputs/open-hundred/report.json"); console.log(JSON.stringify({sourceId:r.sourceId,detectionRate:r.detectionRate,windowsEvaluated:r.windowsEvaluated,acceptedWindows:r.acceptedWindows,bestCandidate:r.bestCandidate&&{startMs:r.bestCandidate.startMs,endMs:r.bestCandidate.endMs,confidence:r.bestCandidate.confidence,pumps:r.bestCandidate.pumps,metrics:r.bestCandidate.metrics}},null,2))'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: open-hundred-pose-validation
+          path: outputs/open-hundred/
+          retention-days: 7
+          if-no-files-found: error
