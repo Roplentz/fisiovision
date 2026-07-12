@@ -32,9 +32,9 @@ export function authorizeM3GymResearchUse(
   if (!manifest.consentOrLegalBasis.toLowerCase().includes("non-commercial")) {
     errors.push("legal basis must state non-commercial use");
   }
-  if (!provenance.accessAgreementVersion.trim()) errors.push("access agreement version is required");
+  if (!provenance.accessAgreementVersion.trim() || /pending/i.test(provenance.accessAgreementVersion)) errors.push("final access agreement version is required");
   if (!provenance.approvedInstitution.trim()) errors.push("approved institution is required");
-  if (!provenance.approvalReference.trim()) errors.push("approval reference is required");
+  if (!provenance.approvalReference.trim() || /pending/i.test(provenance.approvalReference)) errors.push("final approval reference is required");
   if (provenance.commercialUse !== false) errors.push("commercial use is prohibited");
   if (provenance.modelTraining !== false) errors.push("model training is disabled for this validation boundary");
   if (provenance.redistribution !== false) errors.push("redistribution is prohibited");
