@@ -60,3 +60,4 @@ export * from "./protocols/pilates-side-kick.js";
 export * from "./protocols/pilates-leg-pull-front.js";
 export * from "./protocols/pilates-plank.js";
 export * from "./protocols/pilates-bird-dog.js";
+export * from "./protocols/pilates-teaser.js";
