@@ -62,3 +62,4 @@ export * from "./protocols/pilates-plank.js";
 export * from "./protocols/pilates-bird-dog.js";
 export * from "./protocols/pilates-teaser.js";
 export * from "./m3gym.js";
+export * from "./open-media.js";
