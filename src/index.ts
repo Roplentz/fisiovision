@@ -51,3 +51,4 @@ export * from "./protocols/pilates-side-leg-lift.js";
 export * from "./protocols/pilates-roll-down.js";
 export * from "./protocols/pilates-single-leg-stretch.js";
 export * from "./protocols/pilates-the-hundred.js";
+export * from "./protocols/pilates-swimming.js";
