@@ -47,3 +47,4 @@ export * from "./multimodel-report.js";
 export * from "./keraal.js";
 export * from "./protocols/trunk-lateral-flexion.js";
 export * from "./protocols/pilates-shoulder-bridge.js";
+export * from "./protocols/pilates-side-leg-lift.js";
