@@ -64,3 +64,4 @@ export * from "./protocols/pilates-teaser.js";
 export * from "./m3gym.js";
 export * from "./open-media.js";
 export * from "./pilates-recognition.js";
+export * from "./recognition/pilates-the-hundred.js";
