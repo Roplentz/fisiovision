@@ -22,7 +22,7 @@ describe("Pilates Shoulder Bridge",()=>{
     expect(output.reasons.some((reason)=>reason.code==="incomplete_cycle")).toBe(true);
   });
   it("supports the right side and quality rejection",()=>{
-    const frames=Array.from({length:12},(_,index)=>{const value=frame(index*100,0,.2);value.landmarks[12]={x:.25,y:.65,visibility:.2};value.landmarks[24]={x:.5,y:.7,visibility:.2};value.landmarks[26]={x:.7,y:.65,visibility:.2};value.landmarks[28]={x:.86,y:.72,visibility:.2};return value});
+    const frames=Array.from({length:12},(_,index)=>{const value=frame(index*100,0,.2);const landmarks=[...value.landmarks];landmarks[12]={x:.25,y:.65,visibility:.2};landmarks[24]={x:.5,y:.7,visibility:.2};landmarks[26]={x:.7,y:.65,visibility:.2};landmarks[28]={x:.86,y:.72,visibility:.2};return {...value,landmarks}});
     expect(runPilatesShoulderBridgeProtocol(frames,{side:"right"}).reasons.some((reason)=>reason.code==="low_visibility")).toBe(true);
   });
 });
