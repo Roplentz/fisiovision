@@ -41,3 +41,6 @@ export * from "./butterworth.js";
 export * from "./anthropometry.js";
 export * from "./metric-evidence.js";
 export * from "./agreement.js";
+export * from "./multimodel-benchmark.js";
+export * from "./multimodel-io.js";
+export * from "./multimodel-report.js";
