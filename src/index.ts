@@ -72,3 +72,6 @@ export * from "./recognition/pilates-teaser.js";
 export * from "./analysis-jobs.js";
 export * from "./analysis-http-api.js";
 export * from "./pilatesvision-client.js";
+export * from "./supabase-analysis-store.js";
+export * from "./analysis-worker.js";
+export * from "./local-mediapipe-extractor.js";

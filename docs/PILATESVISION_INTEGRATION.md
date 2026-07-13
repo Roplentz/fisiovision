@@ -49,6 +49,14 @@ Outros exercícios retornam `400 invalid_request` até validação clínica.
 
 O token deve ser emitido somente no backend/Edge Function. Nunca armazenar chave de assinatura ou token permanente no navegador.
 
-## Limite desta entrega
+## Persistência e worker
 
-O contrato, autenticação, idempotência e consulta estão implementados. O armazenamento em memória deve ser substituído por PostgreSQL/Redis antes de múltiplas réplicas. O worker que baixa a URL temporária, extrai pose e atualiza o job será a próxima entrega.
+1. Aplicar `supabase/migrations/202607130001_fisiovision_analyses.sql`.
+2. Configurar API e worker com `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`.
+3. Configurar `FISIOVISION_VIDEO_HOSTS` com os hosts autorizados do Storage, separados por vírgula.
+4. Instalar MediaPipe/OpenCV conforme o workflow de validação.
+5. Executar a API com `npm run start:api` e o worker com `npm run start:worker`.
+
+O worker faz claim atômico com `FOR UPDATE SKIP LOCKED`, limita o vídeo a 200 MB, recusa redirects e hosts não autorizados, extrai pose em diretório temporário, executa primeiro o gate de reconhecimento e só então o protocolo biomecânico. Arquivos temporários são removidos após cada job.
+
+Para produção, API e worker devem rodar como serviços separados. A service-role key permanece exclusivamente no backend.

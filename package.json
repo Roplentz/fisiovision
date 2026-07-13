@@ -13,7 +13,8 @@
     "test:e2e": "vitest run tests/sprint16.e2e.test.ts",
     "benchmark:multimodel": "node dist/multimodel-entry.js",
     "dataset:keraal": "node scripts/download-keraal-sample.mjs",
-    "dataset:open-pilates": "node scripts/download-open-media.mjs"
+    "dataset:open-pilates": "node scripts/download-open-media.mjs",
+    "start:worker": "node dist/worker-entry.js"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
