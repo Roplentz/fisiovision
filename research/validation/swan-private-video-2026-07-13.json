@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "fisiovision-private-video-validation-v0.1",
+  "exerciseId": "pilates-swan",
+  "validatedAt": "2026-07-13",
+  "privacy": "Raw user-supplied videos were not committed or published; only aggregate derived results are retained.",
+  "poseExtractor": {"name": "MediaPipe Pose", "version": "0.10.21", "sampleFps": 10},
+  "cases": [
+    {
+      "id": "classical-swan-complete-cycle",
+      "expertLabel": true,
+      "detectedFrames": 191,
+      "accepted": true,
+      "evidence": {"liftTorsoRatio": 0.681, "returnErrorTorsoRatio": 0.159, "wristMovementTorsoRatio": 0.330, "hipMovementTorsoRatio": 0.363, "ankleHipLengthRange": 0.144}
+    },
+    {
+      "id": "swan-dive-mixed-video",
+      "expertLabel": false,
+      "detectedFrames": 129,
+      "accepted": false,
+      "failedCriteria": ["supported_trunk_extension", "pelvis_legs_stable", "complete_return"],
+      "evidence": {"wristMovementTorsoRatio": 3.372, "hipMovementTorsoRatio": 1.039, "ankleHipLengthRange": 1.346}
+    }
+  ]
+}
