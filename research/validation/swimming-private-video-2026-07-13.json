@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "fisiovision-private-video-validation-v0.1",
+  "exerciseId": "pilates-swimming",
+  "validatedAt": "2026-07-13",
+  "privacy": "Raw user-supplied video was not committed or published; only aggregate derived results are retained.",
+  "poseExtractor": {"name": "MediaPipe Pose", "version": "0.10.21", "sampleFps": 10},
+  "cases": [
+    {
+      "id": "complete-swimming-0-4s",
+      "expertLabel": true,
+      "detectedFrames": 40,
+      "accepted": true,
+      "contralateralCorrelation": -0.934,
+      "criteriaScores": {"proneHorizontalPosture": 1, "armsProjected": 1, "legsLifted": 1, "contralateralAlternation": 1}
+    },
+    {
+      "id": "legs-only-preparation-5-16s",
+      "expertLabel": false,
+      "detectedFrames": 110,
+      "accepted": false,
+      "contralateralCorrelation": -0.412,
+      "failedCriteria": ["contralateral_alternation"]
+    },
+    {
+      "id": "rest-and-instruction-17-26.7s",
+      "expertLabel": false,
+      "detectedFrames": 97,
+      "accepted": false,
+      "failedCriteria": ["legs_lifted", "contralateral_alternation"],
+      "risk": "Two people are visible; a single-person estimator may switch identity to the instructor."
+    }
+  ]
+}
