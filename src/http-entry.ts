@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { createDeploymentHandler } from "./http-api.js";
 import { AnalysisService, InMemoryAnalysisStore } from "./analysis-jobs.js";
+import { SupabaseAnalysisStore } from "./supabase-analysis-store.js";
 import { createAnalysisHandler } from "./analysis-http-api.js";
 import { ReleaseFileStore } from "./release-file-store.js";
 import { CachedJwksProvider } from "./jwks-cache.js";
@@ -22,7 +23,8 @@ const handler=createDeploymentHandler({
   metrics,
   readiness:()=>releases.some((release)=>release.status==="approved")&&jwks.isReady(),
 });
-const analysisHandler=createAnalysisHandler({service:new AnalysisService(new InMemoryAnalysisStore()),jwt:{issuer:required("FISIOVISION_JWT_ISSUER"),audience:required("FISIOVISION_JWT_AUDIENCE"),jwksUrl,fetchJwks:(url)=>jwks.fetch(url)},...(rateLimiter?{rateLimiter}:{})});
+const analysisStore=process.env.SUPABASE_URL&&process.env.SUPABASE_SERVICE_ROLE_KEY?new SupabaseAnalysisStore({url:process.env.SUPABASE_URL,serviceRoleKey:process.env.SUPABASE_SERVICE_ROLE_KEY}):new InMemoryAnalysisStore();
+const analysisHandler=createAnalysisHandler({service:new AnalysisService(analysisStore),jwt:{issuer:required("FISIOVISION_JWT_ISSUER"),audience:required("FISIOVISION_JWT_AUDIENCE"),jwksUrl,fetchJwks:(url)=>jwks.fetch(url)},...(rateLimiter?{rateLimiter}:{})});
 const port=Number(process.env.PORT??8080);
 const server=createServer((request,response)=>void analysisHandler(request,response).then(handled=>handled?undefined:handler(request,response)));
 server.listen(port,()=>console.log(JSON.stringify({level:"info",event:"api_started",port,rateLimiter:redisUrl?"redis":"memory"})));
