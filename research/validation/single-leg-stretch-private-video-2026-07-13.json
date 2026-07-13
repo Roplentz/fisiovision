@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "fisiovision-private-video-validation-v0.1",
+  "exerciseId": "pilates-single-leg-stretch",
+  "validatedAt": "2026-07-13",
+  "privacy": "Raw user-supplied videos were not committed or published; only aggregate derived results are retained.",
+  "poseExtractor": {"name": "MediaPipe Pose", "version": "0.10.21", "sampleFps": 5},
+  "cases": [
+    {
+      "id": "user-supplied-positive",
+      "expertLabel": true,
+      "detectedFrames": 89,
+      "accepted": true,
+      "criteriaScores": {"supineOrientation": 1, "headShouldersLifted": 1, "handsSupportFlexedLeg": 0.999, "bothLegsSuspended": 1}
+    },
+    {
+      "id": "user-supplied-single-leg-lift-hard-negative",
+      "expertLabel": false,
+      "detectedFrames": 117,
+      "accepted": false,
+      "criteriaScores": {"supineOrientation": 1, "headShouldersLifted": 1, "handsSupportFlexedLeg": 0, "bothLegsSuspended": 0.567},
+      "failedCriteria": ["hands_support_flexed_leg", "both_legs_suspended"]
+    }
+  ]
+}
