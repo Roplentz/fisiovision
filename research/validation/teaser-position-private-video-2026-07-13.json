@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "fisiovision-private-video-validation-v0.1",
+  "exerciseId": "pilates-teaser",
+  "validatedAt": "2026-07-13",
+  "validationScope": "position-recognition-only",
+  "privacy": "Raw user-supplied video was not committed or published; only aggregate derived results are retained.",
+  "poseExtractor": {"name": "MediaPipe Pose", "version": "0.10.21", "sampleFps": 10},
+  "cases": [
+    {
+      "id": "teaser-hold-0-8s",
+      "expertLabel": true,
+      "detectedFrames": 80,
+      "accepted": true,
+      "evidence": {"medianVAngle": 97.854, "medianKneeAngle": 169.235, "shoulderAboveHipFrameRatio": 1, "ankleAboveHipFrameRatio": 1}
+    },
+    {
+      "id": "bent-knee-exit-8-12.9s",
+      "expertLabel": false,
+      "detectedFrames": 49,
+      "accepted": false,
+      "failedCriteria": ["legs_raised", "knees_extended", "sustained_position"],
+      "evidence": {"medianVAngle": 117.218, "medianKneeAngle": 54.546, "ankleAboveHipFrameRatio": 0.224}
+    }
+  ],
+  "limitation": "The video does not contain a clear supine start and synchronized full rise/return, so it does not validate the biomechanical repetition protocol."
+}
