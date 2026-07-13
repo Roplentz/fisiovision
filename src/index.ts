@@ -68,3 +68,4 @@ export * from "./recognition/pilates-the-hundred.js";
 export * from "./recognition/pilates-single-leg-stretch.js";
 export * from "./recognition/pilates-swimming.js";
 export * from "./recognition/pilates-swan.js";
+export * from "./recognition/pilates-teaser.js";
