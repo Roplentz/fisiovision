@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "fisiovision-private-video-validation-v0.1",
+  "exerciseId": "pilates-teaser",
+  "validatedAt": "2026-07-13",
+  "validationScope": "complete-repetition",
+  "privacy": "Raw user-supplied video was not committed or published; only aggregate derived results are retained.",
+  "poseExtractor": {"name": "MediaPipe Pose", "version": "0.10.21", "sampleFps": 10},
+  "case": {
+    "id": "teaser-complete-cycle",
+    "expertLabel": true,
+    "detectedFrames": 77,
+    "selectedSide": "right",
+    "rightSideValidFrameRate": 1,
+    "leftSideValidFrameRate": 0,
+    "accepted": true,
+    "completeRepetitions": 1,
+    "unfinishedRepetitions": 1,
+    "firstCompleteCycleMs": {"start": 500, "end": 2500},
+    "evidence": {"shoulderLiftPeakTorsoRatio": 0.899, "legLiftPeakTorsoRatio": 1.022}
+  },
+  "note": "The second repetition starts but the recording ends before return tolerance is reached."
+}
